@@ -1,0 +1,20 @@
+useage:
+
+$("#counter").countDown({
+    'year': 2011,
+    'month': 11,
+    'day': 10,
+    'hour': 14,
+    'minute': 30,
+    'second': 0,
+    'overText': 'Count Down Over!',
+    'format' : 'dd Days hh Hours mm Minutes ss Seconds'
+});
+
+-----------------
+date format:
+-----------------
+dd  Days
+hh  Hours
+mm  Minutes
+ss  Seconds
