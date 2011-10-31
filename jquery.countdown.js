@@ -37,8 +37,9 @@ $.fn.countDown = function(options) {
         'format' : 'dd days hh hours mm minutes ss seconds' 
     };
     var opts = $.extend(defaults, options);
-
+    
     var countDownDate = new Date();
+    countDownDate.setDate(1); //必须先将日期设置成1，否则某些31号的时候，再设置月份的时候，对于该月只有30天的话，会自动跳到下一个月
     countDownDate.setYear(opts.year);
     countDownDate.setMonth(opts.month - 1);
     countDownDate.setDate(opts.day);
@@ -46,6 +47,8 @@ $.fn.countDown = function(options) {
     countDownDate.setMinutes(opts.minute);
     countDownDate.setSeconds(opts.second);
     this.countDownTime = Math.floor(countDownDate.getTime()/1000);
+    
+    
     this._opts = opts;
 
     this.beginCountDown = function() {
