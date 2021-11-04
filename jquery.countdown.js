@@ -1,7 +1,7 @@
 /*!
  * jQuery Countdown plugin v0.1
  *
- * http://www.acwind.net/blog
+ * https://blog.acwinds.com
  *
  * Copyright 2011, hylwrcool@gmail.com
  * 
