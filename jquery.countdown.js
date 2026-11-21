@@ -24,54 +24,81 @@
  * THE SOFTWARE.
  */
 
-$.fn.countDown = function(options) {
-    var _this = this;
-    var defaults = {
-        'year': 2020,
-        'month': 1,
-        'day': 1,
-        'hour': 1,
-        'minute': 1,
-        'second': 1,
-        'overText': 'Count Down Over!',
-        'format' : 'dd days hh hours mm minutes ss seconds' 
-    };
-    var opts = $.extend(defaults, options);
-    
-    var countDownDate = new Date();
-    countDownDate.setDate(1); //必须先将日期设置成1，否则某些31号的时候，再设置月份的时候，对于该月只有30天的话，会自动跳到下一个月
-    countDownDate.setYear(opts.year);
-    countDownDate.setMonth(opts.month - 1);
-    countDownDate.setDate(opts.day);
-    countDownDate.setHours(opts.hour);
-    countDownDate.setMinutes(opts.minute);
-    countDownDate.setSeconds(opts.second);
-    this.countDownTime = Math.floor(countDownDate.getTime()/1000);
-    
-    
-    this._opts = opts;
+(function($) {
+    var stateKey = 'countDownState';
 
-    this.beginCountDown = function() {
-        
-        var nowDate = new Date();
-        var nowTime = Math.floor(nowDate.getTime()/1000);
-
-        var interval = _this.countDownTime - nowTime;
-        if (interval <= 0) {
-            $(this).html(_this._opts.overText);
+    function stopCountDown(element) {
+        var state = $.data(element, stateKey);
+        if (!state) {
             return;
         }
-    
-        var day = Math.floor(interval/(3600*24));
-        var hour = Math.floor((interval%(3600*24))/3600);
-        var minute = Math.floor((interval%(3600)/60));
-        var second = Math.floor((interval%60));
 
-        var format = _this._opts.format;
-        format = format.replace('dd', day).replace('hh', hour).replace('mm', minute).replace('ss', second);
-        $(_this).html(format);
+        // clone(true) 可能复制倒计时状态，只有原元素可以取消该计时器。
+        if (state.element === element) {
+            clearTimeout(state.timeoutId);
+        }
+        $.removeData(element, stateKey);
     }
-    
-    setInterval(this.beginCountDown, 1000);
 
-}
+    $.fn.countDown = function(options) {
+        if (options === 'destroy') {
+            return this.each(function() {
+                stopCountDown(this);
+            });
+        }
+
+        var opts = $.extend({
+            year: 2020,
+            month: 1,
+            day: 1,
+            hour: 1,
+            minute: 1,
+            second: 1,
+            overText: 'Count Down Over!',
+            format: 'dd days hh hours mm minutes ss seconds',
+            onComplete: null
+        }, options);
+        var targetTime = new Date(
+            opts.year, opts.month - 1, opts.day, opts.hour, opts.minute, opts.second
+        ).getTime();
+
+        return this.each(function() {
+            var element = this;
+            var $element = $(element);
+            var state = { element: element, timeoutId: null };
+
+            stopCountDown(element);
+            $.data(element, stateKey, state);
+
+            function update() {
+                if ($.data(element, stateKey) !== state) {
+                    return;
+                }
+
+                var remainingMilliseconds = targetTime - new Date().getTime();
+                if (remainingMilliseconds > 0) {
+                    var remainingSeconds = Math.ceil(remainingMilliseconds / 1000);
+                    var days = Math.floor(remainingSeconds / 86400);
+                    var hours = Math.floor(remainingSeconds % 86400 / 3600);
+                    var minutes = Math.floor(remainingSeconds % 3600 / 60);
+                    var seconds = remainingSeconds % 60;
+                    var format = opts.format.replace('dd', days).replace('hh', hours)
+                        .replace('mm', minutes).replace('ss', seconds);
+
+                    // 在剩余秒数即将变化时刷新，避免沿用启动时的毫秒偏移。
+                    state.timeoutId = setTimeout(update, remainingMilliseconds % 1000 || 1000);
+                    $element.html(format);
+                    return;
+                }
+
+                stopCountDown(element);
+                $element.html(opts.overText);
+                if (remainingMilliseconds <= 0 && typeof opts.onComplete === 'function') {
+                    opts.onComplete.call(element);
+                }
+            }
+
+            update();
+        });
+    };
+})(jQuery);

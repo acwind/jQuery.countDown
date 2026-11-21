@@ -1,20 +1,36 @@
-useage:
+jQuery Countdown 用法
+
+下面的示例从页面运行时起倒计时 5 分钟。
+
+var deadline = new Date(Date.now() + 5 * 60 * 1000);
 
 $("#counter").countDown({
-    'year': 2011,
-    'month': 11,
-    'day': 10,
-    'hour': 14,
-    'minute': 30,
-    'second': 0,
-    'overText': 'Count Down Over!',
-    'format' : 'dd Days hh Hours mm Minutes ss Seconds'
+    year: deadline.getFullYear(),
+    month: deadline.getMonth() + 1,
+    day: deadline.getDate(),
+    hour: deadline.getHours(),
+    minute: deadline.getMinutes(),
+    second: deadline.getSeconds(),
+    overText: '倒计时结束',
+    format: 'dd 天 hh 小时 mm 分 ss 秒',
+    onComplete: function() {
+        $(this).addClass('finished');
+    }
 });
 
------------------
-date format:
------------------
-dd  Days
-hh  Hours
-mm  Minutes
-ss  Seconds
+目标时间按浏览器本地时间计算，month 从 1 开始。初始化会立即显示剩余时间。
+到期后显示 overText，并对每个元素调用一次可选的 onComplete。回调中的 this 指向当前元素。
+目标时间已到期时，初始化会立即显示 overText 并执行回调。
+
+对同一个元素再次初始化会替换之前的倒计时。使用下面的调用可手动停止倒计时。
+
+$("#counter").countDown("destroy");
+
+初始化和停止都支持 jQuery 链式调用。
+
+时间格式占位符
+
+dd  天
+hh  小时
+mm  分钟
+ss  秒
