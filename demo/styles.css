@@ -1,0 +1,272 @@
+:root {
+    color-scheme: light;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: #192b24;
+    background: #f0f5f1;
+    --border: #cedbd3;
+    --muted: #53665e;
+    --accent: #c9f383;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.wrap {
+    width: min(52rem, calc(100% - 2rem));
+    margin-inline: auto;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.25rem;
+    padding-block: 1.4rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.wordmark {
+    font-weight: 750;
+    letter-spacing: -0.03em;
+}
+
+.site-header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.site-header a {
+    color: #365c4d;
+    font-weight: 600;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+}
+
+.site-header a:hover {
+    color: #173e2d;
+}
+
+main {
+    padding-block: clamp(1.75rem, 5vw, 3.5rem) 3rem;
+}
+
+h1 {
+    margin: 0 0 1.5rem;
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.05em;
+}
+
+:lang(zh-CN) h1 {
+    letter-spacing: normal;
+}
+
+.countdown-card {
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 1.25rem;
+    background: white;
+    box-shadow: 0 1.25rem 3rem rgb(25 43 36 / 0.08);
+}
+
+.monitor {
+    padding: clamp(1.25rem, 5vw, 2.5rem);
+    color: #f5fff8;
+    background: #162d24;
+    --status-color: #a9bfb2;
+}
+
+.monitor[data-state="running"] {
+    --status-color: var(--accent);
+}
+
+.monitor[data-state="finished"] {
+    --status-color: #86e3bd;
+}
+
+.monitor[data-state="error"] {
+    --status-color: #ffc5a3;
+}
+
+.monitor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.monitor-header h2 {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 650;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid rgb(245 255 248 / 0.23);
+    border-radius: 2rem;
+    font-size: 0.875rem;
+}
+
+.status::before {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--status-color);
+    content: "";
+}
+
+.countdown {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: clamp(1.5rem, 5vw, 2.75rem);
+    text-align: center;
+}
+
+.countdown > div + div {
+    border-left: 1px solid rgb(245 255 248 / 0.19);
+}
+
+.countdown strong {
+    display: block;
+    font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+    font-size: clamp(1.875rem, 8vw, 5rem);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.06em;
+}
+
+.countdown > div:last-child strong {
+    color: var(--accent);
+}
+
+.countdown span {
+    display: block;
+    margin-top: 0.65rem;
+    font-size: 0.875rem;
+    color: #bdcfc6;
+}
+
+.controls {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 1.5rem;
+    padding: clamp(1.25rem, 5vw, 2.5rem);
+}
+
+.duration-settings {
+    display: grid;
+    gap: 0.65rem;
+    max-width: 20rem;
+}
+
+label {
+    font-weight: 650;
+}
+
+.duration-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.9rem;
+    padding-inline: 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 0.65rem;
+    color: var(--muted);
+    background: #f6f9f7;
+}
+
+.duration-field:focus-within {
+    outline: 2px solid #377657;
+    outline-offset: 2px;
+}
+
+.duration-field input {
+    flex: 1;
+    min-width: 0;
+    width: 100%;
+    padding: 0.6rem 0;
+    border: 0;
+    outline: 0;
+    color: #192b24;
+    background: transparent;
+    font: inherit;
+    font-weight: 650;
+}
+
+.presets,
+.actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+button {
+    min-height: 2.5rem;
+    padding: 0.45rem 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.65rem;
+    color: #192b24;
+    background: #f6f9f7;
+    font: inherit;
+    font-weight: 650;
+    cursor: pointer;
+}
+
+button:not(:disabled):hover {
+    background: #e5eee7;
+}
+
+button:disabled {
+    color: var(--muted);
+    opacity: 0.65;
+    cursor: default;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 2px solid #377657;
+    outline-offset: 3px;
+}
+
+.actions button {
+    min-width: 6.25rem;
+    min-height: 2.9rem;
+}
+
+.actions .primary {
+    min-width: 7.5rem;
+    border-color: #abcd76;
+    background: var(--accent);
+}
+
+.actions .primary:not(:disabled):hover {
+    background: #b8e468;
+}
+
+@media (max-width: 35rem) {
+    .controls {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .duration-settings {
+        max-width: none;
+    }
+
+    .actions button {
+        flex: 1;
+    }
+}

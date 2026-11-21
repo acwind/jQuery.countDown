@@ -1,23 +1,27 @@
 # jQuery Countdown
 
-一个用于网页的轻量级 jQuery 倒计时插件。为元素指定目标时间后，插件会立即显示剩余的天、小时、分钟和秒，到期后自动更新结束文案并停止计时。
+[简体中文](./README.zh-CN.md) · [Live demo](https://acwind.github.io/jQuery.countDown/demo/)
 
-## 快速开始
+A lightweight jQuery plugin for counting down to a target date. It displays the remaining days, hours, minutes, and seconds immediately, then shows a completion message and stops the timer when the target time arrives.
 
-将插件文件保存为 `jquery.countdown.js`，在同一目录创建 `index.html` 并粘贴下面的代码，然后用浏览器打开页面。 [插件源码](./jquery.countdown.js)
+In the demo, pick a preset or enter a duration in seconds to try starting, restarting, and stopping the timer. To run the demo from a local clone, open `demo/index.html` in your browser.
 
-示例从官方 CDN 加载 jQuery 3.7.1，并从页面打开时起倒计时 5 分钟。 [jQuery 官方 CDN](https://releases.jquery.com/jquery/)
+## Quick start
+
+Save the plugin as `jquery.countdown.js`. Create an `index.html` file in the same directory, paste the example below, and open the page in a browser. [Plugin source](./jquery.countdown.js)
+
+The example loads jQuery 3.7.1 from the official CDN and starts a five-minute countdown when the page opens. [jQuery CDN](https://releases.jquery.com/jquery/)
 
 ```html
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>五分钟倒计时</title>
+    <title>Five-minute countdown</title>
 </head>
 <body>
-    <h1>五分钟倒计时</h1>
+    <h1>Five-minute countdown</h1>
     <p id="counter" role="timer"></p>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -34,25 +38,25 @@
             hour: deadline.getHours(),
             minute: deadline.getMinutes(),
             second: deadline.getSeconds(),
-            format: "dd 天 hh 小时 mm 分 ss 秒",
-            overText: "倒计时结束"
+            format: "dd days hh hours mm minutes ss seconds",
+            overText: "Time's up!"
         });
     </script>
 </body>
 </html>
 ```
 
-接入已有页面时，先加载 jQuery，再加载 `jquery.countdown.js`，等目标元素进入 DOM 后调用 `$(selector).countDown(options)`。修改示例中的 `5 * 60 * 1000` 可以调整倒计时时长。
+To add the plugin to an existing page, load jQuery first and then `jquery.countdown.js`. Once the target element is in the DOM, call `$(selector).countDown(options)`. Change `5 * 60 * 1000` in the example to set a different duration in milliseconds.
 
-## 常用用法
+## Examples
 
-### 在指定时间执行操作
+### Run an action when the timer ends
 
-下面的例子倒计时到浏览器本地时间 2030 年 1 月 1 日 09:00:00，到期后启用报名按钮。将日期和时间改成你的活动开始时间。
+This example counts down to January 1, 2030 at 09:00:00 in the browser's local time zone. When the timer ends, it enables the sign-up button. Set the date and time to match your event.
 
 ```html
 <p id="event-counter" role="timer"></p>
-<button id="signup-button" type="button" disabled>报名</button>
+<button id="signup-button" type="button" disabled>Sign up</button>
 ```
 
 ```javascript
@@ -63,8 +67,8 @@ $("#event-counter").countDown({
     hour: 9,
     minute: 0,
     second: 0,
-    format: "距活动开始还有 dd 天 hh 小时 mm 分 ss 秒",
-    overText: "报名已开放",
+    format: "Starts in dd days hh hours mm minutes ss seconds",
+    overText: "Registration is open",
     onComplete: function() {
         $(this).addClass("is-finished");
         $("#signup-button").prop("disabled", false);
@@ -72,11 +76,11 @@ $("#event-counter").countDown({
 });
 ```
 
-插件先显示 `overText`，再为每个到期元素执行一次 `onComplete`。回调中的 `this` 指向当前 DOM 元素。如果初始化时目标时间已到，这两步会立即执行。
+The plugin first displays `overText`, then runs `onComplete` once per finished element. Inside the callback, `this` is the current DOM element. If the target time has already arrived during initialization, both steps happen immediately.
 
-### 同时启动多个倒计时并单独停止
+### Start multiple timers and stop one independently
 
-给多个元素添加 `countdown` 类即可一起初始化。每个元素独立计时，可以通过更具体的选择器停止其中一个。
+Give multiple elements the `countdown` class to initialize them together. Each element has its own timer, so you can stop one with a more specific selector.
 
 ```html
 <p class="countdown" id="main-counter" role="timer"></p>
@@ -89,52 +93,52 @@ $(".countdown").countDown({
     hour: 9, minute: 0, second: 0
 });
 
-$("#sidebar-counter").countDown("destroy").text("倒计时已停止");
+$("#sidebar-counter").countDown("destroy").text("Countdown stopped");
 ```
 
-初始化和 `destroy` 都返回当前 jQuery 对象，可以继续调用 `.text()`、`.addClass()` 等方法。对同一元素再次调用 `countDown(options)` 会替换原来的计时器。
+Initialization and `destroy` both return the current jQuery object, so you can chain methods such as `.text()` or `.addClass()`. Calling `countDown(options)` again on the same element replaces its current timer.
 
-## 参数
+## Options
 
-日期选项按访问者浏览器的本地时间解释，精确到秒。请填写实际目标日期，时分秒可按需要设为 `0`。
+The browser interprets date and time options in the visitor's local time zone, with one-second precision. Set the date explicitly and use `0` for any time fields that should be zero.
 
-| 参数 | 类型 | 默认值 | 用途 |
+| Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `year` | 数字 | `2020` | 年份，填写完整的四位年份 |
-| `month` | 数字 | `1` | 月份，范围为 `1–12`。从 `Date#getMonth()` 取值时加 `1` |
-| `day` | 数字 | `1` | 当月的第几天，按该月实际天数填写 |
-| `hour` | 数字 | `1` | 小时，范围为 `0–23` |
-| `minute` | 数字 | `1` | 分钟，范围为 `0–59` |
-| `second` | 数字 | `1` | 秒，范围为 `0–59` |
-| `format` | 字符串 | `dd days hh hours mm minutes ss seconds` | 倒计时显示模板 |
-| `overText` | 字符串 | `Count Down Over!` | 到期后的显示内容 |
-| `onComplete` | 函数 | `null` | 到期时执行的可选回调 |
+| `year` | Number | `2020` | Four-digit year |
+| `month` | Number | `1` | Month from 1 to 12. Add 1 when using `Date#getMonth()` |
+| `day` | Number | `1` | Day of the month |
+| `hour` | Number | `1` | Hour from 0 to 23 |
+| `minute` | Number | `1` | Minute from 0 to 59 |
+| `second` | Number | `1` | Second from 0 to 59 |
+| `format` | String | `dd days hh hours mm minutes ss seconds` | Countdown display template |
+| `overText` | String | `Count Down Over!` | Content displayed when the timer ends |
+| `onComplete` | Function | `null` | Optional callback when the timer ends |
 
-### 显示格式
+### Display format
 
-例如，`dd 天 hh 小时 mm 分 ss 秒` 可以显示为 `1 天 2 小时 3 分 4 秒`。每种占位符只替换第一次出现的位置，数值按整数显示。
+For example, `dd days hh hours mm minutes ss seconds` can display as `2 days 3 hours 4 minutes 5 seconds`. The first occurrence of each token is replaced with an unpadded integer.
 
-| 占位符 | 含义 |
+| Token | Meaning |
 | --- | --- |
-| `dd` | 剩余的整天数 |
-| `hh` | 扣除整天后剩余的小时数，`0–23` |
-| `mm` | 扣除整小时后剩余的分钟数，`0–59` |
-| `ss` | 扣除整分钟后剩余的秒数，`0–59` |
+| `dd` | Whole days remaining |
+| `hh` | Hours after whole days, 0–23 |
+| `mm` | Minutes after whole hours, 0–59 |
+| `ss` | Seconds after whole minutes, 0–59 |
 
-## 常见问题
+## Troubleshooting
 
-**一打开页面就显示结束**
+**The page shows the completion message immediately**
 
-确认目标时间仍在将来，并检查年份和月份。省略 `year` 时会使用默认值 `2020`，使倒计时立即结束。
+Check that the target date is still in the future, including the year and month. The default year is `2020`, so leaving it unset makes the timer end immediately.
 
-**调用时报 `$(...).countDown is not a function`**
+**`$(...).countDown is not a function`**
 
-检查 jQuery 和 `jquery.countdown.js` 是否按顺序加载，以及方法名中的 `D` 是否大写。
+Check that jQuery loads before `jquery.countdown.js` and that the method name uses a capital `D`.
 
-**页面上没有显示倒计时**
+**The countdown is missing from the page**
 
-检查选择器是否找到了目标元素，例如 `$("#counter").length` 应为 `1`。可以将初始化脚本放在目标元素之后，或在 `$(function() { ... })` 中调用。
+Check that the selector matches the target element. For example, `$("#counter").length` should be `1` for the quick-start example. Place the initialization script after the target element or call it inside `$(function() { ... })`.
 
-## 许可证
+## License
 
-MIT License。 [完整许可条款](./jquery.countdown.js#L1-L25)
+MIT License. [Full license text](./jquery.countdown.js#L1-L25)

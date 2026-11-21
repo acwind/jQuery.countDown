@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Countdown demo | jQuery Countdown</title>
+    <link rel="stylesheet" href="./styles.css">
+    <script defer src="https://code.jquery.com/jquery-3.7.1.min.js"
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+            crossorigin="anonymous"></script>
+    <script defer src="../jquery.countdown.js"></script>
+    <script defer src="./demo.js"></script>
+</head>
+<body>
+    <header class="site-header wrap">
+        <span class="wordmark">jQuery Countdown</span>
+        <nav>
+            <a id="documentation" href="https://github.com/acwind/jQuery.countDown" data-label="docs">Docs</a>
+            <a id="language" href="?lang=zh-CN" lang="zh-CN" hreflang="zh-CN">简体中文</a>
+        </nav>
+    </header>
+
+    <main class="wrap">
+        <h1 data-label="title">Countdown demo</h1>
+
+        <div class="countdown-card">
+            <section id="monitor" class="monitor" aria-labelledby="timer-heading">
+                <div class="monitor-header">
+                    <h2 id="timer-heading" data-label="remaining">Time remaining</h2>
+                    <span id="timer-status" class="status" role="status">Ready</span>
+                </div>
+                <div id="countdown" class="countdown" role="timer" aria-labelledby="timer-heading"></div>
+            </section>
+
+            <form id="controls" class="controls">
+                <div class="duration-settings">
+                    <label for="duration" data-label="duration">Duration</label>
+                    <div class="duration-field">
+                        <input id="duration" type="number" min="1" max="604800" step="1" value="10"
+                               required aria-describedby="duration-unit">
+                        <span id="duration-unit" data-label="seconds">seconds</span>
+                    </div>
+                    <div id="presets" class="presets" role="group" aria-label="Quick durations">
+                        <button type="button" data-seconds="5">5 sec</button>
+                        <button type="button" data-seconds="15">15 sec</button>
+                        <button type="button" data-seconds="60">1 min</button>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button id="start" class="primary" type="submit" disabled>Start</button>
+                    <button id="stop" type="button" data-label="stop" disabled>Stop</button>
+                </div>
+            </form>
+        </div>
+
+        <noscript>Enable JavaScript to run the countdown.</noscript>
+    </main>
+</body>
+</html>
