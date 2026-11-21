@@ -1,6 +1,6 @@
 # jQuery Countdown
 
-[English](./README.md) · [在线演示](https://acwind.github.io/jQuery.countDown/demo/?lang=zh-CN)
+[English](./README.md) · [在线演示][demo]
 
 一个用于网页的轻量级 jQuery 倒计时插件。为元素指定目标时间后，插件会立即显示剩余的天、小时、分钟和秒，到期后自动更新结束文案并停止计时。
 
@@ -142,3 +142,5 @@ $("#sidebar-counter").countDown("destroy").text("倒计时已停止");
 ## 许可证
 
 MIT License。 [完整许可条款](./jquery.countdown.js#L1-L25)
+
+[demo]: https://livecodes.io/?x=https%3A%2F%2Fraw.githubusercontent.com%2Facwind%2FjQuery.countDown%2Fce427c37e5793f3422c7aa98ed893fe1e8e445b0%2Fdemo%2Findex.html&raw=html&mode=result&head=%3Cmeta+charset%3D%22utf-8%22%3E%3Cmeta+name%3D%22viewport%22+content%3D%22width%3Ddevice-width%2C+initial-scale%3D1%22%3E%3Cmeta+name%3D%22countdown-language%22+content%3D%22zh-CN%22%3E%3Cbase+href%3D%22https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Facwind%2FjQuery.countDown%40ce427c37e5793f3422c7aa98ed893fe1e8e445b0%2Fdemo%2F%22%3E&title=jQuery+Countdown+demo&welcome=false

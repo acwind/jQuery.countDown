@@ -1,6 +1,6 @@
 # jQuery Countdown
 
-[简体中文](./README.zh-CN.md) · [Live demo](https://acwind.github.io/jQuery.countDown/demo/)
+[简体中文](./README.zh-CN.md) · [Live demo][demo]
 
 A lightweight jQuery plugin for counting down to a target date. It displays the remaining days, hours, minutes, and seconds immediately, then shows a completion message and stops the timer when the target time arrives.
 
@@ -142,3 +142,5 @@ Check that the selector matches the target element. For example, `$("#counter").
 ## License
 
 MIT License. [Full license text](./jquery.countdown.js#L1-L25)
+
+[demo]: https://livecodes.io/?x=https%3A%2F%2Fraw.githubusercontent.com%2Facwind%2FjQuery.countDown%2Fce427c37e5793f3422c7aa98ed893fe1e8e445b0%2Fdemo%2Findex.html&raw=html&mode=result&head=%3Cmeta+charset%3D%22utf-8%22%3E%3Cmeta+name%3D%22viewport%22+content%3D%22width%3Ddevice-width%2C+initial-scale%3D1%22%3E%3Cbase+href%3D%22https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Facwind%2FjQuery.countDown%40ce427c37e5793f3422c7aa98ed893fe1e8e445b0%2Fdemo%2F%22%3E&title=jQuery+Countdown+demo&welcome=false
