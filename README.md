@@ -143,4 +143,4 @@ Check that the selector matches the target element. For example, `$("#counter").
 
 MIT License. [Full license text](./jquery.countdown.js#L1-L25)
 
-[demo]: https://livecodes.io/?x=https%3A%2F%2Fraw.githubusercontent.com%2Facwind%2FjQuery.countDown%2Fce427c37e5793f3422c7aa98ed893fe1e8e445b0%2Fdemo%2Findex.html&raw=html&mode=result&head=%3Cmeta+charset%3D%22utf-8%22%3E%3Cmeta+name%3D%22viewport%22+content%3D%22width%3Ddevice-width%2C+initial-scale%3D1%22%3E%3Cbase+href%3D%22https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Facwind%2FjQuery.countDown%40ce427c37e5793f3422c7aa98ed893fe1e8e445b0%2Fdemo%2F%22%3E&title=jQuery+Countdown+demo&welcome=false
+[demo]: https://livecodes.io/?x=https%3A%2F%2Fraw.githubusercontent.com%2Facwind%2FjQuery.countDown%2Fe601f2afce6346232b88ecee391fdf25d800dc21%2Fdemo%2Findex.html&raw=html&mode=result&head=%3Cmeta+charset%3D%22utf-8%22%3E%3Cmeta+name%3D%22viewport%22+content%3D%22width%3Ddevice-width%2C+initial-scale%3D1%22%3E%3Cbase+href%3D%22https%3A%2F%2Fcdn.jsdelivr.net%2Fgh%2Facwind%2FjQuery.countDown%40e601f2afce6346232b88ecee391fdf25d800dc21%2Fdemo%2F%22%3E&title=jQuery+Countdown+demo&welcome=false
