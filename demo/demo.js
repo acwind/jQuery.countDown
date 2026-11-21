@@ -104,6 +104,7 @@
     languageToggle.addEventListener("click", function() {
         showLanguage(languageToggle.lang);
     });
+    languageToggle.disabled = false;
 
     const $ = window.jQuery;
     if (!$ || typeof $.fn.countDown !== "function") {
@@ -112,12 +113,12 @@
     }
 
     const $countdown = $(countdown);
-    start.disabled = false;
 
     for (const button of shortcutButtons) {
         button.addEventListener("click", function() {
             duration.value = button.dataset.seconds;
         });
+        button.disabled = false;
     }
 
     form.addEventListener("submit", function(event) {
@@ -145,4 +146,6 @@
         showState("stopped");
         start.focus();
     });
+
+    start.disabled = false;
 })();
