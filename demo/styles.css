@@ -42,14 +42,26 @@ body {
     gap: 1rem;
 }
 
-.site-header a {
+.site-header a,
+.language-toggle {
     color: #365c4d;
     font-weight: 600;
+    text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.2em;
 }
 
-.site-header a:hover {
+.language-toggle {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.site-header a:hover,
+.site-header .language-toggle:hover {
+    background: transparent;
     color: #173e2d;
 }
 
@@ -157,6 +169,11 @@ h1 {
     margin-top: 0.65rem;
     font-size: 0.875rem;
     color: #bdcfc6;
+}
+
+html[lang="en"] .countdown span[lang="zh-CN"],
+html[lang="zh-CN"] .countdown span[lang="en"] {
+    display: none;
 }
 
 .controls {
